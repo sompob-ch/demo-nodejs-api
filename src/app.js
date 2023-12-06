@@ -8,10 +8,15 @@ app.get("/demo/configmap", (req, res) => {
   res.status(200).send(result);
 });
 
-app.get("/demo/secret", (req, res) => {
+app.get("/demo/secret/key", (req, res) => {
     const secretKey = process.env.SECRET_KEY || "secret-key";
     const result = { secretKey };
     res.status(200).send(result);
+});
+
+app.get("/demo/secret/credential", (req, res) => {
+  const credential = require(`${__dirname}/../config/credential.json`);
+  res.status(200).send(credential);
 });
 
 app.listen(8080, () => {
