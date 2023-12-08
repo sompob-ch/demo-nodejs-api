@@ -1,22 +1,13 @@
 const express = require("express");
 const app = express();
 
-app.get("/demo/configmap", (req, res) => {
+app.get("/demo/config", (req, res) => {
   const key = process.env.CONFIGMAP_KEY || "key";
   const value = process.env.CONFIGMAP_VALUE || "value";
-  const result = { key, value };
-  res.status(200).send(result);
-});
-
-app.get("/demo/secret/key", (req, res) => {
-    const secretKey = process.env.SECRET_KEY || "secret-key";
-    const result = { secretKey };
-    res.status(200).send(result);
-});
-
-app.get("/demo/secret/credential", (req, res) => {
+  const secretKey = process.env.SECRET_KEY || "secret-key";
   const credential = require(`${__dirname}/../config/credential.json`);
-  res.status(200).send(credential);
+  const result = { key, value, secretKey, credential };
+  res.status(200).send(result);
 });
 
 app.listen(8080, () => {
