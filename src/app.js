@@ -29,7 +29,7 @@ app.get("/tanos/mem", (req, res) => {
   const memoryHog = [];
   // while (true) {
     // สร้าง object ขนาดใหญ่และเพิ่มเข้าไปใน array
-    const hog = new Array(1000000).fill("Kubernetes testing");
+    const hog = new Array(30000000).fill({ title: "Kubernetes testing" });
     memoryHog.push(hog);
     console.log(
       `Allocated memory size: ${
