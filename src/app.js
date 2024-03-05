@@ -10,7 +10,7 @@ app.get("/demo/config", (req, res) => {
   res.status(200).send(result);
 });
 
-app.post("/tanos/cpu", (req, res) => {
+app.get("/tanos/cpu", (req, res) => {
   // การคำนวณที่ใช้ CPU อย่างหนัก
   const fibonacci = (n) => {
     if (n < 2) {
@@ -25,7 +25,7 @@ app.post("/tanos/cpu", (req, res) => {
   res.status(200).send();
 });
 
-app.post("/tanos/mem", (req, res) => {
+app.get("/tanos/mem", (req, res) => {
   const memoryHog = [];
   // while (true) {
     // สร้าง object ขนาดใหญ่และเพิ่มเข้าไปใน array
