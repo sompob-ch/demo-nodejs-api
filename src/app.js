@@ -27,10 +27,11 @@ app.get("/tanos/cpu/:param", (req, res) => {
 });
 
 app.get("/tanos/mem/:param", (req, res) => {
+  const param = req.params.param;
   const memoryHog = [];
   // while (true) {
     // สร้าง object ขนาดใหญ่และเพิ่มเข้าไปใน array
-    // const hog = new Array(50000000).fill({ title: "Kubernetes testing" });
+    // const hog = new Array(30000000).fill({ title: "Kubernetes testing" });
     const hog = new Array(parseFloat(param)).fill({ title: "Kubernetes testing" });
     memoryHog.push(hog);
     console.log(
