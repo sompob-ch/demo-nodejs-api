@@ -10,7 +10,8 @@ app.get("/demo/config", (req, res) => {
   res.status(200).send(result);
 });
 
-app.get("/tanos/cpu", (req, res) => {
+app.get("/tanos/cpu/:param", (req, res) => {
+  const param = req.params.param;
   // การคำนวณที่ใช้ CPU อย่างหนัก
   const fibonacci = (n) => {
     if (n < 2) {
@@ -19,17 +20,18 @@ app.get("/tanos/cpu", (req, res) => {
     return fibonacci(n - 1) + fibonacci(n - 2);
   };
   const startUsage = process.cpuUsage();
-  result = fibonacci(50); // ค่านี้สามารถปรับเพื่อเพิ่มหรือลดการใช้ CPU
+  result = fibonacci(parseFloat(param)); // ค่านี้สามารถปรับเพื่อเพิ่มหรือลดการใช้ CPU
   const endUsage = process.cpuUsage(startUsage);
   console.log(`CPU Usage: User ${endUsage.user / 1000} ms, System ${endUsage.system / 1000} ms`);
   res.status(200).send();
 });
 
-app.get("/tanos/mem", (req, res) => {
+app.get("/tanos/mem/:param", (req, res) => {
   const memoryHog = [];
   // while (true) {
     // สร้าง object ขนาดใหญ่และเพิ่มเข้าไปใน array
-    const hog = new Array(30000000).fill({ title: "Kubernetes testing" });
+    // const hog = new Array(50000000).fill({ title: "Kubernetes testing" });
+    const hog = new Array(parseFloat(param)).fill({ title: "Kubernetes testing" });
     memoryHog.push(hog);
     console.log(
       `Allocated memory size: ${
